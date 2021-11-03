@@ -5,19 +5,7 @@ bugs = ['ambrosia beetle', 'army ant', 'bark mantis', 'bat bug', 'bat fly', 'bir
 letters = list(string.ascii_lowercase)
 gridsize = 20
 orientations = [ 'fhoriz', 'rhoriz', 'fvert', 'rvert', 'ufdiag', 'urdiag', 'dfdiag', 'drdiag']
-
-
-chosenbugs = []
-while len(chosenbugs) < 10:
-    chosenbugs.append(random.choice(bugs))
-    chosenbugs = list(set(chosenbugs))
-
-
-chosenbugs = [''.join(x.split(" ")) for x in chosenbugs]
 game = [['']*gridsize for x in range(gridsize)]
-
-
-
 
 def assign(word, gridsize, direction):
     if direction == 'fhoriz' or direction == 'rhoriz':
@@ -99,6 +87,15 @@ def fill():
 
 
 def addbug():
+    chosenbugs = []
+    while len(chosenbugs) < 10:
+        chosenbugs.append(random.choice(bugs))
+        chosenbugs = list(set(chosenbugs))
+
+
+    chosenbugs = [''.join(x.split(" ")) for x in chosenbugs]
+
+    
     for bug in chosenbugs:
         assign(bug, gridsize, random.choice(orientations))
     fill()
@@ -106,16 +103,14 @@ def addbug():
         print(' '.join(x))
 
     print('your word bank is')
-    bugq = []
-    for x in chosenbugs:
-        if len(bugq) < 3:
-            bugq.append(x)
+    while len(chosenbugs) > 0:
+        if len(chosenbugs) > 3:
+               print(' '.join(chosenbugs[:3]))
+               chosenbugs = chosenbugs[3:]
         else:
-            print(' '.join(bugq))
-            bugq = []
-    else:
-        print(' '.join(bugq))
+            print(' '.join(chosenbugs))
+            break
+                    
             
 if __name__ == "__main__":
     addbug()
-                
