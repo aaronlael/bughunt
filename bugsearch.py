@@ -116,4 +116,6 @@ def addbug():
     else:
         print(' '.join(bugq))
             
+if __name__ == "__main__":
+    addbug()
                 
